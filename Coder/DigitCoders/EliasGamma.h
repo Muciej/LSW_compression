@@ -15,7 +15,7 @@ class EliasGamma : public DigitCoder {
 //        std::cout<<number<<": ";
         std::string r;
         while(number!=0) {r=(number%2==0 ?"0":"1")+r; number/=2;}
-        for(int i=0; i<r.size()-1; i++) {
+        for(unsigned int i=0; i<r.size()-1; i++) {
             bitWriter->write(0);
 //            std::cout<<"0";
         }

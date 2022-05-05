@@ -17,17 +17,19 @@ private:
     DigitCoder* digitCoder;
     Dictionary* dictionary;
     std::shared_ptr<std::fstream> inFile;
+    string inFileName;
 public:
 
-    explicit Coder(std::string fileName){
+    explicit Coder(std::string inFile, std::string outFile){
 //        bitWriter = new BitWriter(fileName);
         dictionary = new SimpleFixedSizeDictionary(10000);
 //        digitCoder = new TestCoder(std::move(fileName));
-        digitCoder = new EliasGamma(std::move(fileName));
+        digitCoder = new EliasGamma(std::move(outFile));
+        inFileName = std::move(inFile);
     }
 
-    void encode(const std::string& filename){
-        inFile = std::shared_ptr<std::fstream>(new std::fstream(filename, std::fstream::in), deleterfstream);
+    void encode(){
+        inFile = std::shared_ptr<std::fstream>(new std::fstream(inFileName, std::fstream::in), deleterfstream);
         if (!inFile)
         {
             std::cout << "Error opening file" << std::endl;
@@ -105,12 +107,12 @@ public:
 };
 
 int main(int argc, char* argv[]){
-    if( argc < 2){
-        cout<<"Należy podać nazwę pliku do zakodowania!"<<endl;
+    if( argc < 3){
+        cout<<"Usage: "<<argv[0]<<" <input file> <output file>"<<endl;
         return 0;
     }
-    Coder coder = Coder("compressed");
+    Coder coder = Coder(argv[1], argv[2]);
 //    coder.test();
-    coder.encode(argv[1]);
+    coder.encode();
     return 0;
 }

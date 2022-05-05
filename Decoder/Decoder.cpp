@@ -20,7 +20,7 @@ private:
     std::shared_ptr<std::FILE> outFile;
     string outFileName;
 public:
-    explicit Decoder(std::string inFileName, std::string outFileName) {
+    explicit Decoder(const std::string& inFileName, std::string outFileName) {
         dictionary = new SimpleFixedSizeDictionary(10000);
 //        digitDecoder = new EliasDelta(std::move(fileName));
 //        digitDecoder = new TestDecoder(std::move(outFileName));
