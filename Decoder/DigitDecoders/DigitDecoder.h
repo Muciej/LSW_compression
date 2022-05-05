@@ -8,8 +8,8 @@ class DigitDecoder{
 protected:
     BitReader* bitReader;
 public:
-    explicit DigitDecoder(string filename){
-        bitReader = new BitReader(std::move(filename));
+    explicit DigitDecoder(const string& filename){
+        bitReader = new BitReader(filename);
     }
 
     virtual int decode() = 0;

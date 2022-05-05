@@ -18,6 +18,7 @@ public:
     virtual void encode(int number) = 0;
 
     virtual ~DigitCoder(){
+        bitWriter->write(-1);
         delete bitWriter;
     }
 

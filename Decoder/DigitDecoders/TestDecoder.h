@@ -11,12 +11,13 @@
 
 class TestDecoder : public DigitDecoder {
 public:
-    explicit TestDecoder(string fileName) : DigitDecoder(std::move(fileName)){
+    explicit TestDecoder(const string& fileName) : DigitDecoder(fileName){
 
     }
     int decode() override{
         int integer;
         std::cin >> integer;
+//        std::cout<<integer<<std::endl;
         return integer;
     }
 };

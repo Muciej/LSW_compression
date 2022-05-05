@@ -7,6 +7,7 @@
 #include "../Dictionaries/SimpleFixedSizeDictionary.h"
 #include "DigitCoders/EliasDelta.h"
 #include "DigitCoders/TestCoder.h"
+#include "DigitCoders/EliasGamma.h"
 
 auto deleterfstream = [](std::fstream *f)
 { f->close(); };
@@ -21,7 +22,8 @@ public:
     explicit Coder(std::string fileName){
 //        bitWriter = new BitWriter(fileName);
         dictionary = new SimpleFixedSizeDictionary(10000);
-        digitCoder = new TestCoder(std::move(fileName));
+//        digitCoder = new TestCoder(std::move(fileName));
+        digitCoder = new EliasGamma(std::move(fileName));
     }
 
     void encode(const std::string& filename){

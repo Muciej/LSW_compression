@@ -22,6 +22,7 @@ public:
     }
 
     void write(int b){
+//        std::cout<<b;
         if (b == -1)
         {
             while(buffersize < 8){
@@ -30,6 +31,7 @@ public:
                 buffersize++;
             }
             fwrite(&buffer, sizeof(unsigned char), 1, file.get());
+//            std::cout<<std::endl;
             return;
         }
         buffer = buffer << 1;
