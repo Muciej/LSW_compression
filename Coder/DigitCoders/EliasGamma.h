@@ -12,19 +12,14 @@ class EliasGamma : public DigitCoder {
 
     void encode(int number) override{
         number++;
-//        std::cout<<number<<": ";
         std::string r;
         while(number!=0) {r=(number%2==0 ?"0":"1")+r; number/=2;}
         for(unsigned int i=0; i<r.size()-1; i++) {
             bitWriter->write(0);
-//            std::cout<<"0";
         }
         for(char i : r) {
             bitWriter->write(i-'0');
-//            std::cout<<i-'0';
         }
-//        std::cout<<std::endl;
-
     };
 public:
     explicit EliasGamma(string filename) : DigitCoder( std::move(filename)) {}
