@@ -72,7 +72,7 @@ public:
         }
     }
 
-    ~SimpleFixedSizeDictionary(){
+    ~SimpleFixedSizeDictionary() override{
         delete[] words;
     }
 

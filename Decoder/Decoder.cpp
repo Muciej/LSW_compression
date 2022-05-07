@@ -21,10 +21,10 @@ private:
     string outFileName;
 public:
     explicit Decoder(const std::string& inFileName, std::string outFileName) {
-        dictionary = new SimpleFixedSizeDictionary(10000);
-//        digitDecoder = new EliasDelta(std::move(fileName));
-//        digitDecoder = new TestDecoder(std::move(outFileName));
-        digitDecoder = new EliasGamma(inFileName);
+        dictionary = new SimpleFixedSizeDictionary(1000000);
+//        digitDecoder = new TestDecoder(std::move(inFileName));
+//        digitDecoder = new EliasGamma(inFileName);
+        digitDecoder = new EliasDelta(inFileName);
         this->outFileName = std::move(outFileName);
     }
 
@@ -51,10 +51,6 @@ public:
         }
     }
 
-    void test(){
-
-    }
-
     void output(ustring str){
         std::for_each(str.begin(), str.end(), [this](unsigned char c) { ;
 //            putc(c, stdout);
@@ -72,8 +68,10 @@ int main(int argc , char* argv[]) {
     if (argc < 3){
         std::cout << "Usage: ./decoder <input file> <output file>" << std::endl;
     }
-    Decoder decoder = Decoder(argv[1], argv[2]);
-    decoder.decode();
-//    decoder.test();
+//    Decoder decoder = Decoder(argv[1], argv[2]);
+//    decoder.decode();
+    EliasDelta decoder = EliasDelta(argv[1]);
+    for(int i = 0; i < 5; i++)
+        std::cout << decoder.decode() << std::endl;
     return 0;
 }

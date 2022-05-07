@@ -17,17 +17,15 @@ public:
     int decode() override{
         int len = 0;
         bool nextBit;
-//        while(bitReader->nextBit(nextBit)){
-//            cout<<nextBit;
-//        }
-        if(!bitReader->nextBit(nextBit))
+
+        if(!bitReader->nextBit(nextBit))      // if there is no more bits to read
             return 0;
-        else if (!nextBit)
+        else if (!nextBit)                  // if the next bit is 0
             len++;
-        while(bitReader->nextBit(nextBit) && !nextBit){
+        while(bitReader->nextBit(nextBit) && !nextBit){ // while the next bit is 0
             len++;
         }
-//        cout<<"len: "<<len<<endl;
+
         int number = 0;
         int temp = 1 << (len);
         if(nextBit)

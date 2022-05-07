@@ -22,9 +22,10 @@ public:
 
     explicit Coder(std::string inFile, std::string outFile){
 //        bitWriter = new BitWriter(fileName);
-        dictionary = new SimpleFixedSizeDictionary(10000);
-//        digitCoder = new TestCoder(std::move(fileName));
-        digitCoder = new EliasGamma(std::move(outFile));
+        dictionary = new SimpleFixedSizeDictionary(1000000);
+//        digitCoder = new TestCoder(std::move(outFile));
+//        digitCoder = new EliasGamma(std::move(outFile));
+        digitCoder = new EliasDelta(std::move(outFile));
         inFileName = std::move(inFile);
     }
 
@@ -42,13 +43,9 @@ public:
             s+=c;
             code = dictionary->checkWord(s);
             if (code != -1){    //temp znajduje się w słowniku
-//                printUstring(s);
-//                cout<<" znajduje się w słowniku"<<endl;
                 oldCode = code;
             }
             else{   //temp nie znajduje się w słowniku
-//                printUstring(s);
-//                cout<<" nie znajduje się w słowniku"<<endl;
                 digitCoder->encode(oldCode);
                 dictionary->addWord(s);
                 s.clear();
@@ -106,13 +103,22 @@ public:
     }
 };
 
+void test();
+
 int main(int argc, char* argv[]){
     if( argc < 3){
         cout<<"Usage: "<<argv[0]<<" <input file> <output file>"<<endl;
         return 0;
     }
-    Coder coder = Coder(argv[1], argv[2]);
-//    coder.test();
-    coder.encode();
+//    Coder coder = Coder(argv[1], argv[2]);
+//    coder.encode();
+    test();
     return 0;
+}
+
+void test(){
+    EliasDelta digitCoder = EliasDelta("skompresowane/test");
+    digitCoder.encode(136);
+    for(int i = 5; i >=0; i--)
+        digitCoder.encode(i);
 }
