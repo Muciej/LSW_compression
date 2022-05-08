@@ -110,9 +110,9 @@ int main(int argc, char* argv[]){
         cout<<"Usage: "<<argv[0]<<" <input file> <output file>"<<endl;
         return 0;
     }
-//    Coder coder = Coder(argv[1], argv[2]);
-//    coder.encode();
-    test();
+    Coder coder = Coder(argv[1], argv[2]);
+    coder.encode();
+//    test();
     return 0;
 }
 

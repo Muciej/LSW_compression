@@ -30,6 +30,7 @@ public:
             if(fread(&buffer, sizeof(unsigned char), 1, file.get())){
                 buffer_size = 8;
             } else {
+                bit = false;
                 return false;
             }
         }

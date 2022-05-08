@@ -68,10 +68,10 @@ int main(int argc , char* argv[]) {
     if (argc < 3){
         std::cout << "Usage: ./decoder <input file> <output file>" << std::endl;
     }
-//    Decoder decoder = Decoder(argv[1], argv[2]);
-//    decoder.decode();
-    EliasDelta decoder = EliasDelta(argv[1]);
-    for(int i = 0; i < 5; i++)
-        std::cout << decoder.decode() << std::endl;
-    return 0;
+    Decoder decoder = Decoder(argv[1], argv[2]);
+    decoder.decode();
+//    EliasDelta decoder = EliasDelta(argv[1]);
+//    for(int i = 0; i < 5; i++)
+//        cout<<decoder.decode()<<endl;
+//    return 0;
 }
