@@ -96,7 +96,7 @@ public:
 
     void getInfo(){
         cout<<"Bits read: "<<bytes_read*8<<endl;\
-        cout<<"Bits written: "<< ->getBitsWritten()<<endl;
+        cout<<"Bits written: "<<endl;
 
     }
 
