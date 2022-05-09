@@ -5,27 +5,36 @@
 #ifndef LISTA_3_ELIASOMEGA_H
 #define LISTA_3_ELIASOMEGA_H
 
+#include <iostream>
 #include "DigitCoder.h"
 
 class EliasOmega : public DigitCoder{
-    explicit EliasOmega(string fileName) : DigitCoder(fileName){
 
-    }
+public:
 
     void encode(int number) override{
-        while( number > 1 ){
-            int len = 0;
-            for(int temp = num; temp > 0; temp >>=1)
-                len++;
-            for(int i = 0; i<len; i++){
-                if( (number >> i) & 1 )
-                    bitWriter->write(1);
-                else
-                    bitWriter->write(0);
-                number = len - 1;
+        number++;
+        string encodedString, tempString;
+        while(number > 1){
+            while(number!=0) {tempString=(number%2==0 ?"0":"1")+tempString; number/=2;}
+            number = tempString.length()-1;
+            encodedString = tempString + encodedString;
+            tempString = "";
+        }
+        encodedString += "0";
+
+//        std::cout<<encodedString<<endl;
+        for(char i : encodedString) {
+            if (i == '0') {
+                bitWriter->write(0);
+            } else {
+                bitWriter->write(1);
             }
         }
-        bitWriter->write(0);
+    }
+
+    explicit EliasOmega(string fileName) : DigitCoder(fileName){
+
     }
 };
 

@@ -8,6 +8,7 @@
 #include "DigitCoders/EliasDelta.h"
 #include "DigitCoders/TestCoder.h"
 #include "DigitCoders/EliasGamma.h"
+#include "DigitCoders/EliasOmega.h"
 
 auto deleterfstream = [](std::fstream *f)
 { f->close(); };
@@ -18,6 +19,7 @@ private:
     Dictionary* dictionary;
     std::shared_ptr<std::fstream> inFile;
     string inFileName;
+    long bytes_read = 0;
 public:
 
     explicit Coder(std::string inFile, std::string outFile){
@@ -25,7 +27,8 @@ public:
         dictionary = new SimpleFixedSizeDictionary(1000000);
 //        digitCoder = new TestCoder(std::move(outFile));
 //        digitCoder = new EliasGamma(std::move(outFile));
-        digitCoder = new EliasDelta(std::move(outFile));
+//        digitCoder = new EliasDelta(std::move(outFile));
+        digitCoder = new EliasOmega(std::move(outFile));
         inFileName = std::move(inFile);
     }
 
@@ -40,6 +43,7 @@ public:
         ustring s;
         int code, oldCode = 0;
         while (*inFile >> std::noskipws >> c){
+            bytes_read++;
             s+=c;
             code = dictionary->checkWord(s);
             if (code != -1){    //temp znajduje się w słowniku
@@ -90,6 +94,12 @@ public:
 
     }
 
+    void getInfo(){
+        cout<<"Bits read: "<<bytes_read*8<<endl;\
+        cout<<"Bits written: "<< ->getBitsWritten()<<endl;
+
+    }
+
 
     static void printUstring(ustring s) {
         std::for_each(s.begin(), s.end(), [](unsigned char c) { ;
@@ -117,8 +127,8 @@ int main(int argc, char* argv[]){
 }
 
 void test(){
-    EliasDelta digitCoder = EliasDelta("skompresowane/test");
-    digitCoder.encode(136);
+    EliasOmega digitCoder = EliasOmega("skompresowane/test");
+    digitCoder.encode(123);
     for(int i = 5; i >=0; i--)
         digitCoder.encode(i);
 }
