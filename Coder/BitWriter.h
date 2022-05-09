@@ -20,6 +20,7 @@ private:
     int buffer = 0;
     unsigned char bufferTab[BUFFER_SIZE];
     int currInd = 0;
+    long bits_written = 0;
 public:
     explicit BitWriter(const std::string& filename){
         file = std::shared_ptr<std::FILE>(fopen(filename.c_str(), "wb"), filedeleter);
@@ -54,6 +55,7 @@ public:
             currInd++;
             buffersize = 0;
             buffer = 0;
+            bits_written+=8;
         }
     }
 
@@ -76,6 +78,10 @@ public:
         write(1);
         write(0);
         write(-1);
+    }
+
+    long getBitsWritten(){
+        return bits_written;
     }
 };
 

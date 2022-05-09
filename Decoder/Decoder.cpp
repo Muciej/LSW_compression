@@ -7,6 +7,7 @@
 #include "DigitDecoders/EliasDelta.h"
 #include "DigitDecoders/TestDecoder.h"
 #include "DigitDecoders/EliasGamma.h"
+#include "DigitDecoders/EliasOmega.h"
 
 //auto deleterfstream = [](std::fstream *f)
 //{ f->close(); };
@@ -24,7 +25,8 @@ public:
         dictionary = new SimpleFixedSizeDictionary(1000000);
 //        digitDecoder = new TestDecoder(std::move(inFileName));
 //        digitDecoder = new EliasGamma(inFileName);
-        digitDecoder = new EliasDelta(inFileName);
+//        digitDecoder = new EliasDelta(inFileName);
+        digitDecoder = new EliasOmega(inFileName);
         this->outFileName = std::move(outFileName);
     }
 
@@ -64,14 +66,23 @@ public:
     }
 };
 
+void test(string filename);
+
 int main(int argc , char* argv[]) {
     if (argc < 3){
         std::cout << "Usage: ./decoder <input file> <output file>" << std::endl;
     }
     Decoder decoder = Decoder(argv[1], argv[2]);
     decoder.decode();
-//    EliasDelta decoder = EliasDelta(argv[1]);
+//    test(argv[1]);
+    return 0;
+}
+
+void test(string filename){
+    //    EliasDelta decoder = EliasDelta(argv[1]);
 //    for(int i = 0; i < 5; i++)
 //        cout<<decoder.decode()<<endl;
-//    return 0;
+    EliasOmega decoder = EliasOmega(filename);
+    for(int i = 0; i < 5; i++)
+        cout<<decoder.decode()<<endl;
 }
