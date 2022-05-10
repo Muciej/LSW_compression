@@ -8,6 +8,7 @@
 #include "DigitDecoders/TestDecoder.h"
 #include "DigitDecoders/EliasGamma.h"
 #include "DigitDecoders/EliasOmega.h"
+#include "DigitDecoders/FibbCoder.h"
 
 //auto deleterfstream = [](std::fstream *f)
 //{ f->close(); };
@@ -26,7 +27,8 @@ public:
 //        digitDecoder = new TestDecoder(std::move(inFileName));
 //        digitDecoder = new EliasGamma(inFileName);
 //        digitDecoder = new EliasDelta(inFileName);
-        digitDecoder = new EliasOmega(inFileName);
+//        digitDecoder = new EliasOmega(inFileName);
+        digitDecoder = new FibbCoder(inFileName);
         this->outFileName = std::move(outFileName);
     }
 
@@ -71,6 +73,7 @@ void test(string filename);
 int main(int argc , char* argv[]) {
     if (argc < 3){
         std::cout << "Usage: ./decoder <input file> <output file>" << std::endl;
+        return 1;
     }
     Decoder decoder = Decoder(argv[1], argv[2]);
     decoder.decode();
@@ -82,7 +85,7 @@ void test(string filename){
     //    EliasDelta decoder = EliasDelta(argv[1]);
 //    for(int i = 0; i < 5; i++)
 //        cout<<decoder.decode()<<endl;
-    EliasOmega decoder = EliasOmega(filename);
-    for(int i = 0; i < 5; i++)
+    FibbCoder decoder = FibbCoder(filename);
+    for(int i = 0; i < 3; i++)
         cout<<decoder.decode()<<endl;
 }

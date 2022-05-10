@@ -11,7 +11,6 @@
 class EliasGamma : public DigitDecoder {
 public:
     explicit EliasGamma(const string& fileName) : DigitDecoder(fileName){
-
     }
 
     int decode() override{

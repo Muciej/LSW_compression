@@ -9,6 +9,7 @@
 #include "DigitCoders/TestCoder.h"
 #include "DigitCoders/EliasGamma.h"
 #include "DigitCoders/EliasOmega.h"
+#include "DigitCoders/FibbCoder.h"
 
 auto deleterfstream = [](std::fstream *f)
 { f->close(); };
@@ -28,7 +29,8 @@ public:
 //        digitCoder = new TestCoder(std::move(outFile));
 //        digitCoder = new EliasGamma(std::move(outFile));
 //        digitCoder = new EliasDelta(std::move(outFile));
-        digitCoder = new EliasOmega(std::move(outFile));
+//        digitCoder = new EliasOmega(std::move(outFile));
+        digitCoder = new FibbCoder(std::move(outFile));
         inFileName = std::move(inFile);
     }
 
@@ -127,8 +129,17 @@ int main(int argc, char* argv[]){
 }
 
 void test(){
-    EliasOmega digitCoder = EliasOmega("skompresowane/test");
-    digitCoder.encode(123);
-    for(int i = 5; i >=0; i--)
-        digitCoder.encode(i);
+//    EliasOmega digitCoder = EliasOmega("skompresowane/test");
+//    digitCoder.encode(123);
+//    for(int i = 5; i >=0; i--)
+//        digitCoder.encode(i);
+      FibbCoder digitCoder = FibbCoder("skompresowane/test");
+//      digitCoder.countFibb();
+//      digitCoder.printResult();
+      digitCoder.encode(3);
+      digitCoder.encode(5);
+      digitCoder.encode(7);
+      digitCoder.encode(9);
+      digitCoder.encode(12);
+      digitCoder.encode(155);
 }
